@@ -1,4 +1,4 @@
-> # Local installation
+># 🫱 Local installation for development
 ## Install environment
 ```bash
 python -m venv venv
@@ -9,18 +9,31 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-# Install packages
+## Install packages
 ```bash
 pip install --upgrade -r ./requirements.txt
 ```
 
-# Start the server
+## Start the server
 ```bash
 uvicorn app.main:app --reload
 ```
 
-> # Run with Docker
+> # 🫱 Run with Docker
 ## Build and execute container
 ```bash
 docker compose up --build --force-recreate
+```
+
+> # 🫱 Run with the bash script
+In the file [execution.sh](./execution.sh) we can execute with two options, one locally and one with docker:
+
+➡️ Local
+```bash
+bash execution.sh --local
+```
+
+➡️ Container execution 
+```bash
+bash execution.sh --docker
 ```
