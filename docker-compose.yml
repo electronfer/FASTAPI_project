@@ -1,0 +1,12 @@
+version: "2.10"
+services:
+  fastapi:
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    image: backend_fastapi_i
+    container_name: backend_fastapi_c
+    ports:
+      - "80:80"
+
+#sudo docker compose up --build --force-recreate
