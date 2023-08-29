@@ -20,6 +20,12 @@ uvicorn app.main:app --reload
 ```
 
 > # 🫱 Run with Docker
+
+## Create an .env file with the path of main file, for example:
+```bash
+APPLICATION_PATH=app.main:app
+```
+
 ## Build and execute container
 ```bash
 docker compose up --build --force-recreate
