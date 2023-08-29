@@ -9,14 +9,14 @@ from passlib.context import CryptContext
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import jwt, JWTError
-
+import os
 
 router = APIRouter()
 
 
 # generate a secret key: 
 # openssl rand -hex 32
-SECRET_KEY = '0c603f5b39861eb04765b8cc1139d8a001aa5bd14257753f6806226fd3e1dfe9'
+SECRET_KEY = os.getenv("SECRET_KEY", '0c603f5b39861eb04765b8cc1139d8a001aa5bd14257753f6806226fd3e1dfe9')
 ALGORITHM = 'HS256'
 
 

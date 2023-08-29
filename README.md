@@ -24,6 +24,7 @@ uvicorn app.main:app --reload
 ## Create an .env file with the path of main file, for example:
 ```bash
 APPLICATION_PATH=app.main:app
+SECRET_KEY=<my_secret_key_to_encrypt>
 ```
 
 ## Build and execute container
