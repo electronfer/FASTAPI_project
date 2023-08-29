@@ -30,10 +30,19 @@ In the file [execution.sh](./execution.sh) we can execute with two options, one 
 
 ➡️ Local
 ```bash
-bash execution.sh --local
+bash execution.sh --local --install
+bash execution.sh --local --run_books_app
+```
+or
+
+```bash
+bash execution.sh --local --install
+bash execution.sh --local --run_todo_app
 ```
 
 ➡️ Container execution 
 ```bash
 bash execution.sh --docker
 ```
+# 🫱 API documentation
+## To access the API documentation, you must access the endpoints */docs* or */redoc*
