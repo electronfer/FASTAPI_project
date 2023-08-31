@@ -52,4 +52,13 @@ bash execution.sh --local --run_todo_app
 bash execution.sh --docker
 ```
 # 🫱 API documentation
-## To access the API documentation, you must access the endpoints */docs* or */redoc*
+### To access the API documentation, you must access the endpoints */docs* or */redoc*
+
+# 🫱 Libraries used in the application
+* *fastapi:* web framework for the API building.
+* *uvicorn[standard]:* ASGI server, for production.
+* *sqlalchemy:* "object-relational mapping" library.
+* *passlib[bcrypt]:* package to handle password hashes.
+* *python-jose[cryptography]:* package to generate and verify the JWT tokens.
+* *psycopg2-binary:* PostgreSQL database adapter.
+* *pymssql:* SQL Server database adapter.
