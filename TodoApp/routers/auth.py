@@ -2,9 +2,9 @@ from typing import Annotated
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from TodoApp.models import Users
+from ..models import Users
 from sqlalchemy.orm import Session
-from TodoApp.database import SessionLocal
+from ..database import SessionLocal
 from passlib.context import CryptContext
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer

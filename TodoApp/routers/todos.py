@@ -1,8 +1,8 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Path
-from TodoApp.models import Todos
+from ..models import Todos
 from pydantic import BaseModel, Field
-from TodoApp.database import SessionLocal
+from ..database import SessionLocal
 from sqlalchemy.orm import Session
 from starlette import status
 from .auth import get_current_user
