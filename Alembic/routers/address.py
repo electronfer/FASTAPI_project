@@ -1,18 +1,17 @@
 import sys
 sys.path.append("..")
 
-from typing import Optional
-from fastapi import Depends, APIRouter
+from typing import Optional, Annotated
+from fastapi import Depends, APIRouter, HTTPException
 from ..models import Address, Users
-from ..database import engine, SessionLocal
+from ..database import SessionLocal
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
-from .auth import get_current_user, get_user_exception
+from pydantic import BaseModel, Field
+from .auth import get_current_user
 
 router = APIRouter(
     prefix="/address",
-    tags=["address"],
-    responses={404: {"description": "Not found"}}
+    tags=["address"]
 )
 
 
@@ -23,22 +22,40 @@ def get_db():
     finally:
         db.close()
 
+db_dependency = Annotated[Session, Depends(get_db)]
+user_dependency = Annotated[dict, Depends(get_current_user)]
 
-class Address(BaseModel):
-    address1: str
-    address2: Optional[str]
-    city: str
-    state: str
-    country: str
-    postalcode: str
+class AddressRequest(BaseModel):
+    
+    address1: str = Field(min_length=1)
+    address2: str = Field(min_length=1)
+    city: str = Field(min_length=1)
+    state: str = Field(min_length=1)
+    country: str = Field(min_length=1)
+    postalcode: str = Field(min_length=1)
+    apt_num: int = Optional[int]
+
+    class Config:
+        json_schema_extra = {
+            'example': {
+                'address1': 'address1',
+                'address2': 'address2',
+                'city': 'city',
+                'state': 'state',
+                'country': 'country',
+                'postalcode': 'postalcode',
+                'apt_num': 123
+            }
+        }
 
 
 @router.post("/")
-async def create_address(address: Address,
-                         user: dict = Depends(get_current_user),
-                         db: Session = Depends(get_db)):
+async def create_address(address: AddressRequest,
+                         user: user_dependency,
+                         db: db_dependency):
     if user is None:
-        raise get_user_exception()
+        raise HTTPException(status_code=401, detail='Authentication Failed')
+    
     address_model = Address()
     address_model.address1 = address.address1
     address_model.address2 = address.address2
@@ -46,6 +63,7 @@ async def create_address(address: Address,
     address_model.state = address.state
     address_model.country = address.country
     address_model.postalcode = address.postalcode
+    address_model.apt_num = address.apt_num
 
     db.add(address_model)
     db.flush()
@@ -58,9 +76,4 @@ async def create_address(address: Address,
 
     db.commit()
 
-
-
-
-
-
-
+    db.commit()

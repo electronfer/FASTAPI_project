@@ -2,11 +2,11 @@ import sys
 
 from typing import Optional
 from fastapi import Depends, HTTPException, APIRouter
-from ..models import Todos
-from ..database import engine, SessionLocal, Base
+from ..models import Todos, Base
+from ..database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
-from .auth import get_current_user, get_user_exception
+from .auth import get_current_user
 
 
 router = APIRouter(
