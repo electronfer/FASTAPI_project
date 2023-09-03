@@ -2,6 +2,7 @@
 # bash execution.sh --local --install
 # bash execution.sh --local --run_books_app
 # bash execution.sh --local --run_todo_app
+# bash execution.sh --local --run_alembic_app
 # bash execution.sh --docker
 # Define the Help function
 display_help() {
@@ -11,6 +12,7 @@ display_help() {
     echo "  --local --install -> Set the environment to run the application"
     echo "  --local --run_books_app  -> Run the books app locally"
     echo "  --local --run_todo_app  -> Run the todo app locally"
+    echo "  --local --run_alembic_app  -> Run the alembic app locally"
     echo "  --docker -> Build and execute the Docker container"
 }
 # Check if the user specified the help option
@@ -35,6 +37,11 @@ fi
 if [ "$2" == "--run_todo_app" ]; then
 source ./venv/bin/activate
 uvicorn TodoApp.main:app --reload
+fi
+
+if [ "$2" == "--run_alembic_app" ]; then
+source ./venv/bin/activate
+uvicorn Alembic.main:app --reload
 fi
 
 fi
